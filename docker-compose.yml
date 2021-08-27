@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  eventex:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./eventex:/eventex
+  
