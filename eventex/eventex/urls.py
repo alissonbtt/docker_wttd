@@ -18,10 +18,12 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from core.views import home
+from subscriptions.views import subscribe
 
 
 urlpatterns = [
     path('', home),
+    path('inscricao/', subscribe), 
     path('admin/', admin.site.urls),
 ]
 if settings.DEBUG:
