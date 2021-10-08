@@ -35,6 +35,8 @@ ALLOWED_HOSTS.extend(
     )
 )
 
+DEFAULT_FROM_EMAIL = 'alisson_servidores@hotmail.com'
+
 
 # Application definition
 
