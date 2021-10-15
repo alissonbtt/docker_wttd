@@ -142,8 +142,7 @@ MEDIA_ROOT = '/vol/web/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# DEBUG = bool(int(os.environ.get('DEBUG', 0)))
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
