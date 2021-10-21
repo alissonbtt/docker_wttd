@@ -2,11 +2,11 @@ from django.test import TestCase
 from subscriptions.forms import SubscriptionForm
 from subscriptions.models import Subscription
 from django.core import mail
-
+from django.shortcuts import resolve_url as r
         
-class SubscribeGet(TestCase):
+class SubscriptionsNewGet(TestCase):
     def setUp(self):
-        self.resp = self.client.get('/inscricao/')
+        self.resp = self.client.get(r('subscriptions:new'))
     
     def test_get(self):
         """Get /inscricao/ retorna status code 200"""
@@ -38,15 +38,16 @@ class SubscribeGet(TestCase):
 
 class SubscribePostvalid(TestCase):
     def setUp(self):
-         data = dict(name='Alisson Bittencourt',
+        data = dict(name='Alisson Bittencourt',
                     cpf='12345678910',
                     email='alison_btt@hotmail.com',
                     phone='45-99929-4016')
-         self.resp = self.client.post('/inscricao/', data)
+         
+        self.resp = self.client.post(r('subscriptions:new'), data)
     
     def test_post(self):
-        """Valid POST should redirect to /inscricao/"""                
-        self.assertEqual(302, self.resp.status_code)
+        """Valid POST should redirect to /inscricao/1/"""                
+        self.assertRedirects(self.resp, r('subscriptions:detail', 12))
         
     def test_send_subscribe_email(self):
         self.assertEqual(1, len(mail.outbox))
@@ -56,9 +57,9 @@ class SubscribePostvalid(TestCase):
 
         
                 
-class SubscribePostInvalid(TestCase):
+class SubscriptionsNewPostInvalid(TestCase):
     def setUp(self):
-        self.resp = self.client.post('/inscricao/', {})
+        self.resp = self.client.post(r('subscriptions:new'), {})
         
     def test_post(self):
         self.assertEqual(200, self.resp.status_code)
@@ -76,14 +77,6 @@ class SubscribePostInvalid(TestCase):
     
     def test_dont_save_subsription(self):
         self.assertFalse(Subscription.objects.exists())
-        
-class SubscribeSuccesMessage(TestCase):
-    def test_message(self):
-        data =  dict(name='Alisson Bittencourt',
-                    cpf='12345678910',
-                    email='alison_btt@hotmail.com',
-                    phone='45-99929-4016')
-        
-        response = self.client.post('/inscricao/', data, follow=True)
-        self.assertContains(response, 'Inscrição realizada com sucesso!')
+
+
         
