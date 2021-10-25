@@ -10,12 +10,19 @@ def validate_cpf(value):
         raise ValidationError('CPF deve ter 11 números', 'length')
     
 class SubscriptionForm(forms.Form):
-    name = forms.CharField(max_length=150)
-    cpf = forms.CharField(max_length=11, validators=[validate_cpf])
-    email = forms.EmailField()
-    phone = forms.CharField()
+    name = forms.CharField(label='Nome', max_length=150)
+    cpf = forms.CharField(label='CPF', validators=[validate_cpf])
+    email = forms.EmailField(label='Email', required=False)
+    phone = forms.CharField(label='Telefone', required=False)
     
     def clean_name(self):
         name = self.cleaned_data['name'].title()
         return name
+    
+    def clean(self):
+        if not self.cleaned_data.get('email') and \
+           not self.cleaned_data.get('phone'):
+            
+            raise ValidationError('Informe seu e-mail ou telefone.')
         
+        return  self.cleaned_data
