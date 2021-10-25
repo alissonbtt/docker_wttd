@@ -14,3 +14,8 @@ class SubscriptionForm(forms.Form):
     cpf = forms.CharField(max_length=11, validators=[validate_cpf])
     email = forms.EmailField()
     phone = forms.CharField()
+    
+    def clean_name(self):
+        name = self.cleaned_data['name'].title()
+        return name
+        
