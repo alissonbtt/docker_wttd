@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from core.models import Speaker
 
 
 def home(request):
-    speakers = [
-        {'nama': 'Grace Hopper', 'photo':'http://hbn.link/hopper-pic'},
-        {'nama': 'Alan Turing', 'photo':'http://hbn.link/turing-pic'},
-    ]
+    speakers = Speaker.objects.all()
     
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'speakers': speakers})
+
+def speaker_detail(request, slug):
+    speaker = get_object_or_404(Speaker, slug=slug)    
+    return render(request, 'core/speaker_detail.html', {'speaker':speaker})
+    
