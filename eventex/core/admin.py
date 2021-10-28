@@ -1,9 +1,15 @@
 from django.contrib import admin
-from core.models import Sample, Speaker
+from core.models import Contact, Sample, Speaker
 from django.utils.html import format_html
 
 
+class ContactInLine(admin.TabularInline):
+    model = Contact
+    extra = 1
+    
+
 class SpeakerModelAdmin(admin.ModelAdmin):
+    inlines = [ContactInLine]
     prepopulated_fields = {'slug': ('name',)}
     list_display = ['name', 'photo_img', 'website_link']
     
