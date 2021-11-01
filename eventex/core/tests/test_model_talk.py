@@ -91,4 +91,4 @@ class CourseModelTest(TestCase):
         self.assertIsInstance(Course.objects, PeriodManager)
 
     def test_ordering(self):
-        self.assertListEqual(['start'], Talk._meta.ordering)
+        self.assertListEqual(['start'], Course._meta.ordering)
