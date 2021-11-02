@@ -1,56 +1,11 @@
-from django.http.response import Http404
-from django.shortcuts import render, resolve_url as r
+from django.views.generic import DetailView
+
 from subscriptions.forms import SubscriptionForm
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core import mail
-from django.template.loader import render_to_string
-from django.contrib import messages
-from django.conf import settings
+from subscriptions.mixins import EmailCreateView
 from subscriptions.models import Subscription
 
+new = EmailCreateView.as_view(model=Subscription,
+                              form_class=SubscriptionForm,
+                              email_subject='Confirmação de inscrição')
 
-def new(request):
-    if request.method =='POST':
-        return create(request)
-   
-    return empty_form(request)
-    
-        
-def empty_form(request):
-    return render(request, 'subscriptions/subscription_form.html', 
-                  {'form': SubscriptionForm()})
-    
-    
-def create(request):
-    form = SubscriptionForm(request.POST)
-            
-    if not form.is_valid():     
-        return render(request, 'subscriptions/subscription_form.html',
-                      {'form': form})
-        
-    # subscription = Subscription.objects.create(**form.cleaned_data)
-    subscription = form.save()
-    
-    _send_email('Confirmação de inscrição',
-                settings.DEFAULT_FROM_EMAIL,
-                subscription.email,
-                'subscriptions/subscription_email.txt',
-                {'subscription': subscription})
-    
-   
-    return HttpResponseRedirect(r('subscriptions:detail', subscription.pk))
-
-
-
-
-def detail(request, pk):
-    try:
-        subscription = Subscription.objects.get(pk=pk)    
-        return render(request,  'subscriptions/subscription_detail.html', {'subscription': subscription})
-    except Subscription.DoesNotExist:
-        raise Http404
-    
-def _send_email(subject, from_, to, template_name, context):
-    body = render_to_string(template_name, context )
-    mail.send_mail(subject, body, from_, [from_, to])
-    
+detail = DetailView.as_view(model=Subscription)
