@@ -1,7 +1,27 @@
 # Eventex
 
 Sistema de eventos 
+## Como desenvolver:
+1. Iniciar um repositório com GitHub.
+2. Clonar o repositório.
+3. Configurar as variáveis de ambientes.
+4. Criar a uma imagem do container.
+5. Criar e rodar o caontainer.
 
+
+```
+git init
+git clone https://github.com/alissonbtt/docker_wttd.git
+cp .env.sample .env
+docker-compose build eventex
+docker-compose up eventex
+```
+
+6. Para rodar navamente o conatainer, usar o seguinte comando para não excluir  o DB.
+
+```
+docker-compose up --no-deps -d
+```
 
 ## Como fazer o deploy em uma instância ec2 aws com linux
 
@@ -12,7 +32,7 @@ Sistema de eventos
 3. Configurar o docker para iniciar sempre que a máquina for reiniciada
 4. Iniciar o Docker
 5. Dar permissão para que o usuário gerencia containers
-6. Isntalar o docker compose
+6. Instalar o docker compose
 7. Aplicar permissões ao executavel binário
 8. Reiniciar instância.
 ```
@@ -54,7 +74,7 @@ docker-compose -f docker-compose-deploy.yml up -d
 ```
 
 15. Caso necessário, atualizar o código se hover alterações.
-16. Atualizar a imagem do coantainer.
+16. Atualizar a imagem do container.
 17. Rodar novamente o docker compose sem excluir o Banco de dados.
 
 ``` 
