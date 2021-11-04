@@ -30,8 +30,7 @@ sudo reboot
 9. Clonar o repositório do projeto
 10. Entrar na pasta do projeto.
 11. Copiar o arquivo .env.sample para o arquivo .env
-12. Gerar uma nova secret_key e copiar e colar na varável de ambiente secret_key
-13. Abrir ao arquivo .env e alterarr as varáveis de ambiente
+12. Abrir ao arquivo .env e alterarr as varáveis de ambiente
 DB_NAME=nome_do_db
 DB_USER=nome_usuário
 DB_PASS=senha_db
@@ -39,23 +38,24 @@ SECRET_KEY=senha_secretkey_django
 ALLOWED_HOSTS=DNS_IPv4_público_da instância
 DEFAULT_FROM_EMAIL=email_criado_sendrig
 EMAIL_HOST_PASSWORD=configurar_email_senha_sendgrid
-14. Apos ajustar as variáveis de ambiente, gerar uma imágem com docker
-15. Criar e rodar containers
-
 
 ```
 git clone https://github.com/alissonbtt/docker_wttd.git
 cd docker_wttd
 cp .env.sample .env
-python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 vi .env
+```
+13. Após ajustar as variáveis de ambiente, gerar uma imágem com docker
+14. Criar e rodar containers
+
+```
 docker-compose -f docker-compose-deploy.yml build eventex
 docker-compose -f docker-compose-deploy.yml up -d
 ```
 
-16. Caso necessário, atualizar o código se hover alterações.
-17. Atualizar a imagem do coantainer.
-18. Rodar novamente o docker compose sem excluir o Banco de dados.
+15. Caso necessário, atualizar o código se hover alterações.
+16. Atualizar a imagem do coantainer.
+17. Rodar novamente o docker compose sem excluir o Banco de dados.
 
 ``` 
 git pull origin
