@@ -35,8 +35,7 @@ ALLOWED_HOSTS.extend(
     )
 )
 
-DEFAULT_FROM_EMAIL = 'alisson_servidores@hotmail.com'
-
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 # Application definition
 
