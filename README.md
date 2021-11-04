@@ -2,11 +2,11 @@
 
 Sistema de eventos 
 ## Como desenvolver:
-1. Iniciar um repositório com GitHub.
+1. Iniciar um repositório com Git.
 2. Clonar o repositório.
 3. Configurar as variáveis de ambientes.
 4. Criar a uma imagem do container.
-5. Criar e rodar o caontainer.
+5. Criar e rodar o container.
 
 
 ```
