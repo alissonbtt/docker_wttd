@@ -33,7 +33,7 @@ docker-compose up --no-deps -d
 4. Iniciar o Docker
 5. Dar permissão para que o usuário gerencia containers
 6. Instalar o docker compose
-7. Aplicar permissões ao executavel binário
+7. Aplicar permissões ao executável binário
 8. Reiniciar instância.
 ```
 sudo yum install git -y
@@ -45,7 +45,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 sudo reboot
 ```
-### Após reiniciar a instância, rodar os seguintes passos.
+### Após reiniciar a instância, executar os seguintes passos.
 
 9. Clonar o repositório do projeto
 10. Entrar na pasta do projeto.
@@ -73,7 +73,7 @@ docker-compose -f docker-compose-deploy.yml build eventex
 docker-compose -f docker-compose-deploy.yml up -d
 ```
 
-15. Caso necessário, atualizar o código se hover alterações.
+15. Caso necessário, atualizar o código se houver alterações.
 16. Atualizar a imagem do container.
 17. Rodar novamente o docker compose sem excluir o Banco de dados.
 
